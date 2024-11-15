@@ -1,0 +1,70 @@
+﻿@page
+@model Assignment_BusApplication.Pages.Admin.BusRoutesCRUD.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container transparent-container">
+<h1>Edit</h1>
+
+<h4>BusRoute</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" style="color: red"></div>
+            <input type="hidden" asp-for="BusRoute.RouteId" />
+            <div class="form-group">
+                <label asp-for="BusRoute.StartLocation" class="control-label"></label>
+                <input asp-for="BusRoute.StartLocation" class="form-control" />
+                <span asp-validation-for="BusRoute.StartLocation" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.EndLocation" class="control-label"></label>
+                <input asp-for="BusRoute.EndLocation" class="form-control" />
+                <span asp-validation-for="BusRoute.EndLocation" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.DepartureTime" class="control-label"></label>
+                <input asp-for="BusRoute.DepartureTime" class="form-control" />
+                <span asp-validation-for="BusRoute.DepartureTime" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.ArrivalTime" class="control-label"></label>
+                <input asp-for="BusRoute.ArrivalTime" class="form-control" />
+                <span asp-validation-for="BusRoute.ArrivalTime" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.SeatCapacity" class="control-label"></label>
+                <input asp-for="BusRoute.SeatCapacity" class="form-control" />
+                <span asp-validation-for="BusRoute.SeatCapacity" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.SeatAvailability" class="control-label"></label>
+                <input asp-for="BusRoute.SeatAvailability" class="form-control" />
+                <span asp-validation-for="BusRoute.SeatAvailability" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.Price" class="control-label"></label>
+                <input asp-for="BusRoute.Price" class="form-control" />
+                <span asp-validation-for="BusRoute.Price" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusRoute.BusId" class="control-label"></label>
+                <input asp-for="BusRoute.BusId" class="form-control" />
+                <span asp-validation-for="BusRoute.BusId" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

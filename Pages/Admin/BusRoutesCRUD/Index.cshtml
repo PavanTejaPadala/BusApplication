@@ -1,0 +1,79 @@
+﻿@page
+@model Assignment_BusApplication.Pages.Admin.BusRoutesCRUD.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container transparent-container">
+<h1>Index</h1>
+
+<p>
+    <a asp-page="/Admin/BusCRUD/Index">Back To Bus List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].StartLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].EndLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].SeatCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].SeatAvailability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRoute[0].BusId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.BusRoute) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatAvailability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RouteId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RouteId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.RouteId">Delete</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

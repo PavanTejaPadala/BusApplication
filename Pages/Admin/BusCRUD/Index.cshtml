@@ -1,0 +1,51 @@
+﻿@page
+@model Assignment_BusApplication.Pages.Admin.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container transparent-container">
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a> |
+    <a asp-page="/Admin/BusRoutesCRUD/Index" class="m-1">Routes List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bus[0].BusNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bus[0].DriverName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bus[0].DriverNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bus) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverNumber)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.BusId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.BusId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.BusId">Delete</a> |
+                <a asp-page="/Admin/BusRoutesCRUD/Create" asp-route-id="@item.BusId">Add Routes</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

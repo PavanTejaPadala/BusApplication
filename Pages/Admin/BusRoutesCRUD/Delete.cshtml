@@ -1,0 +1,71 @@
+﻿@page
+@model Assignment_BusApplication.Pages.Admin.BusRoutesCRUD.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="container transparent-container">
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BusRoute</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.StartLocation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.StartLocation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.EndLocation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.EndLocation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.DepartureTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.DepartureTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.ArrivalTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.ArrivalTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.SeatCapacity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.SeatCapacity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.SeatAvailability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.SeatAvailability)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BusRoute.BusId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BusRoute.BusId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="BusRoute.RouteId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
+</div>

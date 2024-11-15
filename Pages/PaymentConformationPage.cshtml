@@ -1,0 +1,44 @@
+﻿@page
+@model Assignment_BusApplication.Pages.PaymentConformationPageModel
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+
+                    <div class="card-body text-center">
+                        <form method="get" action="./Index">
+                            <div class="tick-mark"></div>
+                            <h3 class="card-title">Booking Confirmed!</h3>
+                            <p class="card-text">Thank you for booking with us.</p>
+                            <p class="card-text">Your booking details:</p>
+                            <ul class="list-group text-left">
+                                @for (int i = 0; i < Model.SelectedSeats.Count; i++)
+                                {
+                                    <li class="list-group-item"><strong>Passenger Name:</strong> @Model.PassengerName[i]</li>
+                                    <li class="list-group-item"><strong>Seats Booked:</strong> @Model.SelectedSeats[i]</li>
+                                }
+                            </ul>
+                            <p class="card-text mt-3"><strong>Total Price:</strong> @Model.TotalPrice</p>
+                            <input type="hidden" name="userId" value="@Model.UserDetail" />
+                            <button type="submit" class="btn btn-outline-dark justify-content-center">Back to Home</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

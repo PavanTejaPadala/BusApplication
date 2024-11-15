@@ -1,0 +1,96 @@
+﻿@page
+@model Assignment_BusApplication.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<form method="get" asp-page="./UserBookings">
+    <input type="hidden" name="useremail" value="@Model.UserDetail" />
+    <button type="submit" class="btn btn-light">My Bookings</button>
+</form>
+
+<div class="container">
+    <div class="text-center mt-5">
+        <h1 class="display-4">Welcome To Cybage Travels</h1>
+        <form method="post" asp-page="Index" class="mt-4">
+            <div class="form-row justify-content-center">
+                <div class="col-auto">
+                    <input asp-for="Source" type="text" class="form-control mb-2 mr-sm-2" placeholder="Source" />
+                    <span asp-validation-for="Source" style="color: red"></span>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="Destination" type="text" class="form-control mb-2 mr-sm-2" placeholder="Destination" />
+                    <span asp-validation-for="Destination" style="color: red"></span>
+                </div>
+                <div class="col-auto">
+                    <input asp-for="Date" id="dateField" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="Date" style="color: red"></span>
+                </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="col-auto">
+                    <button type="button" class="btn btn-secondary mb-2" onclick="setDate('today')">Today</button>
+                    <button type="button" class="btn btn-secondary mb-2" onclick="setDate('tomorrow')">Tomorrow</button>
+                </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="col-auto">
+                    <input hidden name="userId" value="@Model.UserDetail" />
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        @if (Model.Buses != null && Model.Buses.Any())
+        {
+            <div class="mt-5">
+                <h2 class="mb-3 transparent-container">Available Buses:</h2>
+                <div class="row">
+                    @foreach (var bus in Model.Buses)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="~/img/thumb-1920-671500.jpg" class="card-img-top" alt="Bus Image" />
+                                
+                                <div class="card-body">
+                                    <h4>Cybage Travels</h4>
+                                    <h5 class="card-title">Bus Number: @bus.BusNumber</h5>
+                                    <form method="post" asp-page-handler="ViewMore">
+                                        <input type="hidden" name="id" value="@bus.BusId" />
+                                        <input type="hidden" name="userId" value="@Model.UserDetail" />
+                                        <button type="submit" class="btn btn-primary">View More</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.NoBus))
+        {
+            <p style="color: red" class="transparent-container">@Model.NoBus</p>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function setDate(type) {
+            var dateField = document.getElementById('dateField');
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (type === 'tomorrow') {
+                today.setDate(today.getDate() + 1);
+                dd = String(today.getDate()).padStart(2, '0');
+                mm = String(today.getMonth() + 1).padStart(2, '0');
+                yyyy = today.getFullYear();
+            }
+
+            today = yyyy + '-' + mm + '-' + dd;
+            dateField.value = today;
+        }
+    </script>
+}

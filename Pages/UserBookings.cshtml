@@ -1,0 +1,99 @@
+﻿@page
+@model Assignment_BusApplication.Pages.UserBookingsModel
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+
+
+@if (ViewData["Error"] != null)
+{
+    <p class="notification">@ViewData["Error"]</p>
+}
+
+<div class="container">
+    @if (Model.userBookings.Any())
+    {
+        <div class="mt-5">
+            <h2 class="mb-3 transparent-container">My Tickets:</h2>
+            <div class="row">
+                @foreach (var ticket in Model.userBookings)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card transparent-container">
+                            <div class="card-body">
+                                <h5 class="card-title">Passenger Name: @ticket.PassengerName</h5>
+                                <p class="card-text">Booked Date: @ticket.BookingDate</p>
+                                <p class="card-text">Seat Number: @ticket.SeatsBooked</p>
+
+                                <form method="post" asp-page-handler="ViewMore">
+                                    <input type="hidden" name="useremail" value="@Model.UserDetail" />
+                                    <input type="hidden" name="routeId" value="@ticket.RouteId" />
+                                    <input type="hidden" name="showModal" value="true" /> 
+                                    <button type="submit" class="btn btn-primary">View More</button>
+                                </form>
+                                <br />
+                                <form method="post" asp-page-handler="CancelTicket">
+                                    <input type="hidden" name="useremail" value="@Model.UserDetail" />
+                                    <input type="hidden" name="bookingId" value="@ticket.BookingId" />
+                                    <button type="submit" class="btn btn-primary">Cancel Ticket</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(Model.NoTickets))
+    {
+        <p class="notification">@Model.NoTickets</p>
+        
+    }
+</div>
+
+@if (Model.showModal)
+{
+    <div id="routeDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Route Details:</h2>
+            <p><strong>From:</strong> @Model.route.StartLocation</p>
+            <p><strong>To:</strong> @Model.route.EndLocation</p>
+            <p><strong>Departure Time:</strong> @Model.route.DepartureTime</p>
+            <p><strong>Arrival Time:</strong> @Model.route.ArrivalTime</p>
+            <p><strong>Seat Capacity:</strong> @Model.route.SeatCapacity</p>
+            <p><strong>Price:</strong> @Model.route.Price</p>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById("routeDetailsModal");
+            var span = document.getElementsByClassName("close")[0];
+
+            if (modal) {
+                modal.style.display = "block";
+                document.body.classList.add('modal-open');
+            }
+
+            if (span) {
+                span.onclick = function () {
+                    modal.style.display = "none";
+                    document.body.classList.remove('modal-open');
+                }
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    document.body.classList.remove('modal-open');
+                }
+            }
+        }); 
+    </script>
+}
+
+

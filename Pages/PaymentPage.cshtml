@@ -1,0 +1,36 @@
+﻿@page
+@model Assignment_BusApplication.Pages.PaymentPageModel
+
+<div class="container transparent-container  p-4">
+    <h2>Payment</h2>
+    <p>Selected Seats: @string.Join(", ", Model.SelectedSeats)</p>
+    <p>Route ID: @Model.RouteId</p>
+    <p>User Email: @Model.UserId</p>
+    <p>Total Price: @Model.Price</p> <!-- Display the total price -->
+    <div>
+        <h2>Payment</h2>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" style="color: red"></div>
+            @for (int i = 0; i < Model.SelectedSeats.Count; i++)
+            {
+                <div>
+                    <label asp-for="PassengerName[i]">Passenger Name:</label>
+                    <input type="text" asp-for="PassengerName[i]" class="form-control" />
+                    <span asp-validation-for="PassengerName[i]" style="color: red"></span>
+
+                    <label asp-for="Age[i]">Age:</label>
+                    <input type="number" asp-for="Age[i]" class="form-control" />
+                    <span asp-validation-for="Age[i]" style="color: red"></span>
+
+                    <label>Seat Number:</label>
+                    <input type="text" value="@Model.SelectedSeats[i]" readonly class="form-control" />
+                </div>
+            }
+            <button type="submit" class="btn btn-success">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
